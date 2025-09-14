@@ -10,22 +10,23 @@ fn read_file(path: String) raises -> String:
 
 # Map Minecraft protocol types -> Java types
 fn map_type(proto_type: String) -> String:
-    if proto_type == "varint":
-        return "int"
-    elif proto_type == "string":
-        return "String"
-    elif proto_type == "bool":
-        return "boolean"
-    elif proto_type == "uuid":
-        return "java.util.UUID"
-    elif proto_type == "ushort":
-        return "int"
-    elif proto_type == "byte_array":
-        return "byte[]"
-    elif proto_type == "bitfield":
-        return "int"
-    else:
-        return "Object"
+    match proto_type:
+        case "varint":
+            return "int"
+        case "string":
+            return "String"
+        case "bool":
+            return "boolean"
+        case "uuid":
+            return "java.util.UUID"
+        case "ushort":
+            return "int"
+        case "byte_array":
+            return "byte[]"
+        case "bitfield":
+            return "int"
+        case _:
+            return "Object"
 
 # Generate Java class code
 fn generate_class(
